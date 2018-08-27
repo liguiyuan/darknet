@@ -493,7 +493,7 @@ void validate_detector_recall(char *cfgfile, char *weightfile)
     fprintf(stderr, "Learning Rate: %g, Momentum: %g, Decay: %g\n", net->learning_rate, net->momentum, net->decay);
     srand(time(0));
 
-    list *plist = get_paths("data/coco_val_5k.list");
+    list *plist = get_paths("/home/liguiyuan/deep_learning/project/darknet/scripts/VOC_person/person_test.txt");
     char **paths = (char **)list_to_array(plist);
 
     layer l = net->layers[net->n-1];
@@ -843,7 +843,7 @@ void run_detector(int argc, char **argv)
     else if(0==strcmp(argv[2], "recall")) validate_detector_recall(cfg, weights);
     else if(0==strcmp(argv[2], "demo")) {
         list *options = read_data_cfg(datacfg);
-        int classes = option_find_int(options, "classes", 20);
+        int classes = option_find_int(options, "classes", 1);
         char *name_list = option_find_str(options, "names", "data/names.list");
         char **names = get_labels(name_list);
         demo(cfg, weights, thresh, cam_index, filename, names, classes, frame_skip, prefix, avg, hier_thresh, width, height, fps, fullscreen);
